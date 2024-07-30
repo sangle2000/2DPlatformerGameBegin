@@ -45,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
         _anim.SetBool("grounded", IsGrounded());
         
         // Wall jump logic
-        if (_wallJumpCooldown < 0.2f)
+        if (_wallJumpCooldown > 0.2f)
         {
             _playerRigidBody.velocity = new Vector2(_horizontalInput * speed, _playerRigidBody.velocity.y);
 
@@ -107,5 +107,10 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D raycastHit = Physics2D.BoxCast(_boxCollider.bounds.center, _boxCollider.bounds.size, 0,
             new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
         return raycastHit.collider != null;
+    }
+
+    public bool CanAttack()
+    {
+        return _horizontalInput == 0 && IsGrounded() && !OnWall();
     }
 }
