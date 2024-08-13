@@ -39,11 +39,8 @@ public class Heart : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void AddHealth(float value)
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            TakeDamage(1);
-        }
+        CurrentHeart = Mathf.Clamp(CurrentHeart + value, 0, startingHeart);
     }
 }
